@@ -1,0 +1,19 @@
+starmap/
+squad_mds/
+data/*
+!data/tasic/
+!data/tasic/**
+results/
+gpfs01/
+build/
+.vscode/
+cne/__pycache__/
+openTSNE/__pycache__/
+openTSNE.egg-info/
+*.pdf
+setup.py
+archive/
+
+# python cache files
+functions/__pycache__/
+*.pyc
