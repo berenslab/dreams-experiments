@@ -1,5 +1,8 @@
-from functions.embedding_quality import embedding_quality
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+from functions.embedding_quality import embedding_quality
 import openTSNE
 from openTSNE import TSNE
 import pickle
@@ -8,8 +11,8 @@ import os
 
 print("Imports completed successfully.")
 
-tasic_pca50 = np.load('../data/tasic/tasic-pca50.npy')
-tasic_ttypes = np.load('../data/tasic/tasic-ttypes.npy')
+tasic_pca50 = np.load('data/tasic/tasic-pca50.npy')
+tasic_ttypes = np.load('data/tasic/tasic-ttypes.npy')
 
 tasic_pca2 = tasic_pca50[:, :2]
 tasic_pca2_scaled = tasic_pca2 / tasic_pca2[:,0].std()
@@ -33,7 +36,7 @@ for seed in range(1):
             'eval': eval
         }
 
-os.makedirs('../results/other_methods', exist_ok=True)
+os.makedirs('results/other_methods', exist_ok=True)
 
-with open('../results/other_methods/tasic_results_opentsne_exaggeration.pkl', 'wb') as f:
+with open('results/other_methods/tasic_results_opentsne_exaggeration.pkl', 'wb') as f:
     pickle.dump(results_dict, f)
