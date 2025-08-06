@@ -7,7 +7,7 @@ DREAMS combines the local structure preservation of $t$-SNE with the global stru
 
 <img width="800" alt="Example DREAMS" src="figures/dreams_spectrum.png">
 
-The code depends on several repositories, especially on [openTSNE](https://github.com/pavlin-policar/openTSNE) and [contrastive-ne](https://github.com/berenslab/contrastive-ne), which build the $t$-SNE backend that DREAMS builds upon. The respective versions with additional regularizer are [DREAMS](https://github.com/NavidadK/DREAMS) and [DREAMS-CNE](https://github.com/NavidadK/DREAMS-CNE).
+The code depends on several repositories, especially on [openTSNE](https://github.com/pavlin-policar/openTSNE) and [contrastive-ne](https://github.com/berenslab/contrastive-ne), which build the $t$-SNE backend that DREAMS builds upon. The respective versions with additional regularizer are [DREAMS](https://github.com/berenslab/DREAMS) and [DREAMS-CNE](https://github.com/berenslab/DREAMS-CNE).
 
 # Installation
 
@@ -24,14 +24,14 @@ pip install -r requirements.txt
 ````
 Install openTSNE with regularizer (DREAMS):
 ````
-git clone --branch tp --single-branch https://github.com/NavidadK/DREAMS.git
+git clone --branch tp --single-branch https://github.com/berenslab/DREAMS.git
 cd DREAMS
 python setup.py install
 cd ..
 ````
 and contrastive-ne with a regularizer (DREAMS-CNE)
 ````
-git clone --branch tp --single-branch https://github.com/NavidadK/DREAMS-CNE.git
+git clone --branch tp --single-branch https://github.com/berenslab/DREAMS-CNE.git
 cd DREAMS-CNE
 pip install --no-deps .
 cd ..
