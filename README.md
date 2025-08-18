@@ -36,7 +36,10 @@ cd DREAMS-CNE
 pip install --no-deps .
 cd ..
 ````
-To perform the experiments, the datasets mentioned in the paper need to be downloaded from the links mentioned in the Datasets section further below, preprocessed as described in the paper and saved in the folder /data. The preprocessed Tasic et al. data set[^tasic] can already be found there.
+
+For a simple example of running DREAMS, see [this notebook](simple_usage.ipynb). 
+
+For reproduce the paper's experiments, the datasets mentioned in the paper need to be downloaded from the links mentioned in the Datasets section further below, preprocessed as described in the paper and saved in the folder /data. The preprocessed Tasic et al. data set[^tasic] can already be found there.
 
 To run our experiments of competing methods, first clone the [SQuadMDS](https://github.com/PierreLambert3/SQuaD-MDS-and-FItSNE-hybrid) and then run (Note: in the code we also compare against StarMAP[^starmap], whose code is as of this moment not publicly available):
 ````
