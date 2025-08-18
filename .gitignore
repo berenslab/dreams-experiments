@@ -1,8 +1,5 @@
 starmap/
 squad_mds/
-data/*
-!data/tasic/
-!data/tasic/**
 results/
 gpfs01/
 build/
