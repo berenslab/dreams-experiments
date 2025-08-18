@@ -7,7 +7,7 @@ DREAMS combines the local structure preservation of $t$-SNE with the global stru
 
 <img width="800" alt="Example DREAMS" src="figures/dreams_spectrum.png">
 
-The code depends on several repositories, especially on [openTSNE](https://github.com/pavlin-policar/openTSNE) and [contrastive-ne](https://github.com/berenslab/contrastive-ne), which build the $t$-SNE backend that DREAMS builds upon. The respective versions with additional regularizer are [DREAMS](https://github.com/berenslab/DREAMS) and [DREAMS-CNE](https://github.com/berenslab/DREAMS-CNE). The links to the original (unprocessed) datasets can be found further below.
+The code depends on several repositories, especially on [openTSNE](https://github.com/pavlin-policar/openTSNE) and [contrastive-ne](https://github.com/berenslab/contrastive-ne), which provide the $t$-SNE backends that DREAMS builds upon. The respective versions with additional regularizer are [DREAMS](https://github.com/berenslab/DREAMS) and [DREAMS-CNE](https://github.com/berenslab/DREAMS-CNE). The links to the original (unprocessed) datasets can be found further below.
 
 # Installation
 
