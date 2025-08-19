@@ -39,7 +39,7 @@ cd ..
 
 For a simple example of running DREAMS, see [this notebook](simple_usage.ipynb). 
 
-To run our experiments of competing methods, first clone the [SQuadMDS](https://github.com/PierreLambert3/SQuaD-MDS-and-FItSNE-hybrid) and then run (Note: in the code we also compare against StarMAP[^starmap], whose code is as of this moment not publicly available):
+To run our experiments of competing methods, first clone the [SQuadMDS](https://github.com/NavidadK/SQuaD-MDS-and-FItSNE-hybrid) and then run (Note: in the code we also compare against StarMAP[^starmap], whose code is as of this moment not publicly available):
 ````
 python experiments/run_other_methods.py
 python experiments/run_openTSNE_exag.py
