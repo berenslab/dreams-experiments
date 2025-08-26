@@ -1,7 +1,7 @@
 DREAMS - Experiments
 ========
 
-This repository contains the code to reproduce the experiments of "DREAMS: Preserving both Local and Global Structure in Dimensionality Reduction".
+This repository contains the code to reproduce the experiments of "DREAMS: Preserving both Local and Global Structure in Dimensionality Reduction" [(arXiv)](https://www.arxiv.org/abs/2508.13747).
 
 DREAMS combines the local structure preservation of $t$-SNE with the global structure preservation of PCA via a regularization term that motivates global structure preservation. It provides a continuum of embeddings along a local-global spectrum with almost no local/global structure preservation tradeoff.
 
