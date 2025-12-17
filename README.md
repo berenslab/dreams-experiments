@@ -39,18 +39,12 @@ cd ..
 
 For a simple example of running DREAMS, see [this notebook](simple_usage.ipynb). 
 
-To run our experiments of competing methods, first clone the [SQuadMDS](https://github.com/NavidadK/SQuaD-MDS-and-FItSNE-hybrid) and then run (Note: in the code we also compare against StarMAP[^starmap], whose code is as of this moment not publicly available):
+To run our experiments of competing methods, first clone [SQuadMDS](https://github.com/NavidadK/SQuaD-MDS-and-FItSNE-hybrid) and then run (Note: in the code we also compare against StarMAP[^starmap], whose code is as of this moment not publicly available):
 ````
 python experiments/run_other_methods.py
-python experiments/run_openTSNE_exag.py
 ````
-To run the DREAMS experiments (Note: run_dreams_mds is using the MDS embedding from run_other_methods.py):
-````
-python experiments/run_dreams_pca.py
-python experiments/run_dreams_mds.py
-python experiments/run_dreams_cne.py
-python experiments/tradeoff_other_methods.py
-````
+To replicate the resulst of the paper, run the files in the \experiments folder (Note: run_dreams_mds is using the MDS embedding from run_other_methods.py):
+
 To analyze and plot the results use:
 ````
 experiments/plot_results_paper.ipynb
@@ -58,7 +52,7 @@ experiments/plot_results_paper.ipynb
 Here all plots of the paper can be found.
 
 # Datasets
-In the experiments, we benchmarked DREAMS using seven real-world datasets that are preprocessed as described in the paper. The preprocessed datasets can be found in the /data folder. The MNIST dataset was downloaded using the torchvision API (we only used the first 50 principle components of the 60k training samples). The remaining original (unprocessed) datasets can be found here:
+In the experiments, we benchmarked DREAMS using seven real-world datasets that are preprocessed as described in the paper. The preprocessed datasets can be found in the /data folder. The MNIST, Fashion MNIST, and CIFAR10 datasets were downloaded using the torchvision API (we only used the first 50 principle components of the 60k training samples). The remaining original (unprocessed) datasets can be found here:
 
 | Dataset Name        | Source Link                                                                 |
 |---------------------|------------------------------------------------------------------------------|
@@ -67,7 +61,10 @@ In the experiments, we benchmarked DREAMS using seven real-world datasets that a
 | Kanton et al.[^kanton]  | [Download](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-7552)                       |
 | Wagner et al.[^wagner] | [Download](https://kleintools.hms.harvard.edu/paper_websites/wagner_zebrafish_timecourse2018/mainpage.html) 
 | Packer et al.[^packer]   | [Download]( http://cb.csail.mit.edu/cb/densvis/datasets/)                     |
-| 1000 Genomes[^genomes]  | [Download](https://ftp.1000genomes.ebi.ac.uk) 
+| 1000 Genomes[^genomes]  | [Download](https://ftp.1000genomes.ebi.ac.uk)
+| Mammoth[^mammoth1][^mammoth2]  | [Download](https://github.com/MNoichl/UMAP-examples-mammoth/blob/master/mammoth_a.csv)
+| Satellite[^sat] | [Download](https://archive.ics.uci.edu/dataset/146/statlog+landsat+satellite)
+
 
 # References
 [^kanton]: Sabina Kanton, Michael James Boyle, Zhisong He, Malgorzata Santel, Anne Weigert, Fátima Sanchís-Calleja, Patricia Guijarro, Leila Sidow, Jonas Simon Fleck, Dingding Han, et al. Organoid single-cell genomic atlas uncovers human-specific features of brain development. Nature, 574(7778):418–422, 2019.
@@ -77,3 +74,9 @@ In the experiments, we benchmarked DREAMS using seven real-world datasets that a
 [^genomes]: The 1000 Genomes Project Consortium. A global reference for human genetic variation. Nature, 526(7571): 68–74, 2015.
 [^wagner]: Daniel E Wagner, Caleb Weinreb, Zach M Collins, James A Briggs, Sean G Megason, and Allon M Klein. Single-cell mapping of gene expression landscapes and lineage in the zebrafish embryo. Science, 360(6392): 981–987, 2018.
 [^starmap]: Koshi Watanabe, Keisuke Maeda, Takahiro Ogawa, and Miki Haseyama. StarMAP: Global neighbor embedding for faithful data visualization. arXiv preprint arXiv:2502.03776, 2025.
+[^mammoth1]: Smithsonian Institution. Mammuthus primigenius (Blumbach) [3D model]. https://3d.si.edu/object/
+3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12, 2020.
+[^mammoth2] Max Noichl. Examples for umap-dimensionality reduction using 3D models of prehistoric animals. https:
+//doi.org/10.5281/zenodo.17290165, 2025. Version 0.0.1. Zenodo.
+[^sat] Ashwin Srinivasan. Statlog (Landsat Satellite). UCI Machine Learning Repository, 1993. DOI:
+https://doi.org/10.24432/C55887
