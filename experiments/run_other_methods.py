@@ -8,6 +8,7 @@ import pickle
 import torchvision
 from sklearn.decomposition import PCA
 import pandas as pd
+import time
 
 print("Imports completed successfully.")
 
@@ -15,8 +16,6 @@ print("Imports completed successfully.")
 # tasic
 tasic_data = np.load('data/tasic/tasic-pca50.npy')
 tasic_labels = np.load('data/tasic/tasic-ttypes.npy')
-tasic_pca2 = tasic_data[:, :2]
-tasic_init = tasic_pca2 / tasic_pca2[:,0].std()
 
 # kanton
 data_file = "data/Kanton/human-409b2.data.npy"
@@ -32,8 +31,6 @@ kanton_init = kanton_pca2 / kanton_pca2[:,0].std()
 genome_data_all = np.loadtxt('data/Genomes/gt_sum_thinned.npy')
 genome_data = PCA(n_components=50).fit_transform(genome_data_all)
 genome_labels = np.loadtxt('data/Genomes/population_labels.txt', dtype=str)
-genome_pca2 = genome_data[:, :2]
-genome_init = genome_pca2 / genome_pca2[:,0].std()
 
 # mnist
 mnist_train = torchvision.datasets.MNIST(root='data',
@@ -57,26 +54,35 @@ y = np.concatenate([y_train, y_test], axis=0)
 pca = PCA(n_components=50)
 mnist_data = pca.fit_transform(x_train)
 mnist_labels = y_train
-mnist_pca2 = mnist_data[:, :2]
-mnist_init = mnist_pca2 / mnist_pca2[:,0].std()
 
 # retina
 retina_data = np.load('data/retina/3000_no_std_pca50.npy')
 retina_labels = np.load('data/retina/labels 1.npy')
-retina_pca2 = retina_data[:, :2]
-retina_init = retina_pca2 / retina_pca2[:,0].std()
 
 # Zebrafish
 zfish_data = np.load('data/zfish/zfish.data.npy')
 zfish_labels = np.load('data/zfish/zfish.labels.npy')
-zfish_pca2 = zfish_data[:, :2]
-zfish_init = zfish_pca2 / zfish_pca2[:,0].std()
 
 # C. elegans
 c_el_data = np.load('data/c_elegans/c_elegans_50pc.npy')
 c_el_labels = np.load('data/c_elegans/c_el_cell_types.npy', allow_pickle=True).astype(str)
-c_el_pca2 = c_el_data[:, :2]
-c_el_init = c_el_pca2 / c_el_pca2[:,0].std()
+
+# mammoth
+mammoth = np.load('data/mammoth/mammoth_pca.npy')
+mammoth_labels = np.load('data/mammoth/mammoth_label.npy')
+
+# fashion_mnist
+f_mnist = np.load('data/fashion_MNIST/fashion_mnist_pca50.npy')
+f_mnist_labels = np.load('data/fashion_MNIST/fashion_mnist_label.npy')
+
+# satellite
+satellite = np.load('data/satellite/satellite_pca.npy')
+satellite_labels = np.load('data/satellite/satellite_label.npy')
+satellite_labels = satellite_labels.ravel()
+
+# cifar10
+cifar10 = np.load('data/CIFAR10/cifar10_50pc.npy')
+cifar10_labels = np.load('data/CIFAR10/cifar10_labels.npy')
 
 data_list = [
     tasic_data, 
@@ -85,7 +91,11 @@ data_list = [
     mnist_data, 
     retina_data, 
     zfish_data, 
-    c_el_data
+    c_el_data,
+    mammoth, 
+    f_mnist, 
+    satellite, 
+    cifar10
 ]
 labels_list = [
     tasic_labels, 
@@ -94,17 +104,13 @@ labels_list = [
     mnist_labels, 
     retina_labels, 
     zfish_labels, 
-    c_el_labels
+    c_el_labels,
+    mammoth_labels, 
+    f_mnist_labels, 
+    satellite_labels, 
+    cifar10_labels
 ]
-init_list = [
-    tasic_init, 
-    kanton_init, 
-    genome_init, 
-    mnist_init, 
-    retina_init, 
-    zfish_init, 
-    c_el_init
-]
+
 names_list = [
     "tasic", 
     "kanton", 
@@ -112,7 +118,11 @@ names_list = [
     "MNIST", 
     "retina", 
     "zfish", 
-    "c_elegans"
+    "c_elegans",
+    "Mammoth", 
+    "Fashion MNIST", 
+    "Satellite", 
+    "CIFAR10"
 ]
 
 print("Data loaded successfully.")
@@ -135,7 +145,6 @@ for i in range(len(data_list)):
     data_name = names_list[i]
     data = data_list[i]
     labels = labels_list[i]
-    init = init_list[i]
 
     results_mds = {}
     results_mds_hybrid = {}
@@ -145,79 +154,105 @@ for i in range(len(data_list)):
     results_star_map = {}
     results_umap = {}
 
+    if data_name == 'Satellite' or data_name == 'kanton':
+        classes = 4
+    else:
+        classes = 6
+
     for rs in range(number_rs):
         print(f"Running {data_name} with random seed {rs}")
         seed_key = f"seed_{rs}"
 
         # SquAD-MDS
+        start = time.perf_counter()
         embd = run_SQuaD_MDS(data, {'in python':False})
-        eval = embedding_quality(embd, data, labels, seed=rs)
+        end = time.perf_counter()
+        eval = embedding_quality(embd, data, labels, seed=rs, knn_classes=classes)
 
         results_mds[seed_key] = {
             'embedding': embd,
             'eval': eval,
+            'time': end - start
         }
         print(f"Squad MDS - {data_name} - Seed {rs} completed.")
 
+        start = time.perf_counter()
         embd = run_hybrid(data, {'in python': True})
-        eval = embedding_quality(embd, data, labels, seed=rs)
+        end = time.perf_counter()
+        eval = embedding_quality(embd, data, labels, seed=rs, knn_classes=classes)
         results_mds_hybrid[seed_key] = {
             'embedding': embd,
             'eval': eval,
+            'time': end - start
         }
         print(f"Squad MDS Hybrid - {data_name} - Seed {rs} completed.")
 
         # pacmap
+        start = time.perf_counter()
         embedder = pacmap.PaCMAP(n_components=2, random_state=rs)
         embd = embedder.fit_transform(data, init='pca')
-        eval = embedding_quality(embd, data, labels, seed=rs)
+        end = time.perf_counter()
+        eval = embedding_quality(embd, data, labels, seed=rs, knn_classes=classes)
 
         results_pacmap[seed_key] = {
             'embedding': embd,
             'eval': eval,
+            'time': end - start
         }
         print(f"PaCMAP - {data_name} - Seed {rs} completed.")
 
         # phate
+        start = time.perf_counter()
         embedder = phate.PHATE(n_jobs=-2, random_state=rs)
         embd = embedder.fit_transform(data)
-        eval = embedding_quality(embd, data, labels, seed=rs)
+        end = time.perf_counter()
+        eval = embedding_quality(embd, data, labels, seed=rs, knn_classes=classes)
 
         results_phate[seed_key] = {
             'embedding': embd,
             'eval': eval,
+            'time': end - start
         }
         print(f"PHATE - {data_name} - Seed {rs} completed.")
 
         # trimap
+        start = time.perf_counter()
         embd = trimap.TRIMAP().fit_transform(data)
-        eval = embedding_quality(embd, data, labels, seed=rs)
+        end = time.perf_counter()
+        eval = embedding_quality(embd, data, labels, seed=rs, knn_classes=classes)
 
         results_trimap[seed_key] = {
             'embedding': embd,
             'eval': eval,
+            'time': end - start
         }
         print(f"TRIMAP - {data_name} - Seed {rs} completed.")
 
         # starmap
+        start = time.perf_counter()
         embedder = StarMAP_v2(data, n_clusters=75, random_state=rs)
         embedder.optimize()
         embd = embedder.embedding
+        end = time.perf_counter()
 
         results_star_map[seed_key] = {
             'embedding': embd,
-            'eval': embedding_quality(embd, data, labels, seed=rs),
+            'eval': embedding_quality(embd, data, labels, seed=rs, knn_classes=classes),
+            'time': end - start
         }
         print(f"Star-MAP - {data_name} - Seed {rs} completed.")
 
         # umap
+        start = time.perf_counter()
         embedder = umap.UMAP(n_components=2, random_state=rs)
         embd = embedder.fit_transform(data)
-        eval = embedding_quality(embd, data, labels, seed=rs)
+        end = time.perf_counter()
+        eval = embedding_quality(embd, data, labels, seed=rs, knn_classes=classes)
 
         results_umap[seed_key] = {
             'embedding': embd,
             'eval': eval,
+            'time': end - start
         }
         print(f"UMAP - {data_name} - Seed {rs} completed.")
 

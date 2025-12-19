@@ -10,6 +10,7 @@ from openTSNE import TSNE
 import torchvision
 from sklearn.decomposition import PCA
 import pandas as pd
+import time
 
 print("Imports completed successfully.")
 
@@ -21,7 +22,7 @@ number_rs = 4
 tasic_data = np.load('data/tasic/tasic-pca50.npy')
 tasic_labels = np.load('data/tasic/tasic-ttypes.npy')
 tasic_pca2 = tasic_data[:, :2]
-tasic_init = tasic_pca2 / tasic_pca2[:,0].std()
+tasic_init = tasic_pca2 / tasic_pca2[:,0].std() * 0.0001
 
 # kanton
 data_file = "data/Kanton/human-409b2.data.npy"
@@ -31,14 +32,14 @@ pkl_file = "data/Kanton/human-409b2.pkl"
 kanton_data = np.load(data_file)
 kanton_labels = np.load(labels_file)
 kanton_pca2 = kanton_data[:, :2]
-kanton_init = kanton_pca2 / kanton_pca2[:,0].std()
+kanton_init = kanton_pca2 / kanton_pca2[:,0].std() * 0.0001
 
 # genome
 genome_data_all = np.loadtxt('data/Genomes/gt_sum_thinned.npy')
 genome_data = PCA(n_components=50).fit_transform(genome_data_all)
 genome_labels = np.loadtxt('data/Genomes/population_labels.txt', dtype=str)
 genome_pca2 = genome_data[:, :2]
-genome_init = genome_pca2 / genome_pca2[:,0].std()
+genome_init = genome_pca2 / genome_pca2[:,0].std() * 0.0001
 
 # mnist
 mnist_train = torchvision.datasets.MNIST(root='data',
@@ -63,25 +64,50 @@ pca = PCA(n_components=50)
 mnist_data = pca.fit_transform(x_train)
 mnist_labels = y_train
 mnist_pca2 = mnist_data[:, :2]
-mnist_init = mnist_pca2 / mnist_pca2[:,0].std()
+mnist_init = mnist_pca2 / mnist_pca2[:,0].std() * 0.0001
 
 # retina
 retina_data = np.load('data/retina/3000_no_std_pca50.npy')
 retina_labels = np.load('data/retina/labels 1.npy')
-retina_pca2 = retina_data[:, :2]
-retina_init = retina_pca2 / retina_pca2[:,0].std()
+retina_pca2 = retina_data[:, :2] 
+retina_init = retina_pca2 / retina_pca2[:,0].std() * 0.0001
 
 # Zebrafish
 zfish_data = np.load('data/zfish/zfish.data.npy')
 zfish_labels = np.load('data/zfish/zfish.labels.npy')
 zfish_pca2 = zfish_data[:, :2]
-zfish_init = zfish_pca2 / zfish_pca2[:,0].std()
+zfish_init = zfish_pca2 / zfish_pca2[:,0].std() * 0.0001
 
 # C. elegans
 c_el_data = np.load('data/c_elegans/c_elegans_50pc.npy')
 c_el_labels = np.load('data/c_elegans/c_el_cell_types.npy', allow_pickle=True).astype(str)
 c_el_pca2 = c_el_data[:, :2]
-c_el_init = c_el_pca2 / c_el_pca2[:,0].std()
+c_el_init = c_el_pca2 / c_el_pca2[:,0].std() * 0.0001
+
+# mammoth
+mammoth = np.load('data/mammoth/mammoth_pca.npy')
+mammoth_labels = np.load('data/mammoth/mammoth_label.npy')
+mammoth_pca2 = mammoth[:, :2]
+mammoth_init = mammoth_pca2 / mammoth_pca2[:,0].std() * 0.0001
+
+# fashion_mnist
+f_mnist = np.load('data/fashion_MNIST/fashion_mnist_pca50.npy')
+f_mnist_labels = np.load('data/fashion_MNIST/fashion_mnist_label.npy')
+f_mnist_pca2 = f_mnist[:, :2]
+f_mnist_init = f_mnist_pca2 / f_mnist_pca2[:,0].std() * 0.0001
+
+# satellite
+satellite = np.load('data/satellite/satellite_pca.npy')
+satellite_labels = np.load('data/satellite/satellite_label.npy')
+satellite_labels = satellite_labels.ravel()
+satellite_pca2 = satellite[:, :2]
+satellite_init = satellite_pca2 / satellite_pca2[:,0].std() * 0.0001
+
+# cifar10
+cifar10 = np.load('data/CIFAR10/cifar10_50pc.npy')
+cifar10_labels = np.load('data/CIFAR10/cifar10_labels.npy')
+cifar10_pca2 = cifar10[:, :2]
+cifar10_init = cifar10_pca2 / cifar10_pca2[:,0].std() * 0.0001
 
 data_list = [
     tasic_data, 
@@ -90,7 +116,11 @@ data_list = [
     mnist_data, 
     retina_data, 
     zfish_data, 
-    c_el_data
+    c_el_data,
+    mammoth, 
+    f_mnist, 
+    satellite, 
+    cifar10
 ]
 labels_list = [
     tasic_labels, 
@@ -99,7 +129,11 @@ labels_list = [
     mnist_labels, 
     retina_labels, 
     zfish_labels, 
-    c_el_labels
+    c_el_labels,
+    mammoth_labels, 
+    f_mnist_labels, 
+    satellite_labels, 
+    cifar10_labels
 ]
 init_list = [
     tasic_init, 
@@ -108,7 +142,11 @@ init_list = [
     mnist_init, 
     retina_init, 
     zfish_init, 
-    c_el_init
+    c_el_init,
+    mammoth_init, 
+    f_mnist_init, 
+    satellite_init, 
+    cifar10_init
 ]
 names_list = [
     "tasic", 
@@ -117,7 +155,11 @@ names_list = [
     "MNIST", 
     "retina", 
     "zfish", 
-    "c_elegans"
+    "c_elegans",
+    "Mammoth", 
+    "Fashion MNIST", 
+    "Satellite", 
+    "CIFAR10"
 ]
 
 print("Data loaded successfully.")
@@ -131,15 +173,22 @@ for data, labels, init, name in zip(data_list, labels_list, init_list, names_lis
         results_dict[seed_key] = {}
 
         for i, l in enumerate(lambdas_list):
-            print(f'Running {i+1}/{len(lambdas_list)*number_rs} with lambda {l}')
+            print(f'Running {(i+1)+(seed*len(lambdas_list))}/{len(lambdas_list)*number_rs} with lambda {l}')
+            start = time.perf_counter()
             embedder = TSNE(initialization=init, regularization=True, reg_lambda=l, reg_embedding=init, reg_scaling='norm', reg_scaling_dims='one', random_state=seed)
             embd = embedder.fit(data)
-            eval = embedding_quality(embd, data, labels, seed=seed)
+            end = time.perf_counter()
+            if name == 'Satellite' or name == 'kanton':
+                classes = 4
+            else:
+                classes = 6
+            eval = embedding_quality(embd, data, labels, seed=seed, knn_classes=classes)
 
             l_key = f"lambda_{l}"
             results_dict[seed_key][l_key] = {
                 'embedding': np.array(embd),
-                'eval': eval
+                'eval': eval,
+                'time': end - start
             }
     os.makedirs('results/dreams/dreams_pca', exist_ok=True)
 
