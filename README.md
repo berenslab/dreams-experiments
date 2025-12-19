@@ -62,7 +62,7 @@ In the experiments, we benchmarked DREAMS using seven real-world datasets that a
 | Wagner et al.[^wagner] | [Download](https://kleintools.hms.harvard.edu/paper_websites/wagner_zebrafish_timecourse2018/mainpage.html) 
 | Packer et al.[^packer]   | [Download]( http://cb.csail.mit.edu/cb/densvis/datasets/)                     |
 | 1000 Genomes[^genomes]  | [Download](https://ftp.1000genomes.ebi.ac.uk)
-| Mammoth[^mammoth1] [^mammoth2]  | [Download](https://github.com/MNoichl/UMAP-examples-mammoth/blob/master/mammoth_a.csv)
+| Mammoth[^mammoth1][^mammoth2]  | [Download](https://github.com/MNoichl/UMAP-examples-mammoth/blob/master/mammoth_a.csv)
 | Satellite[^sat] | [Download](https://archive.ics.uci.edu/dataset/146/statlog+landsat+satellite)
 
 
@@ -76,7 +76,6 @@ In the experiments, we benchmarked DREAMS using seven real-world datasets that a
 [^starmap]: Koshi Watanabe, Keisuke Maeda, Takahiro Ogawa, and Miki Haseyama. StarMAP: Global neighbor embedding for faithful data visualization. arXiv preprint arXiv:2502.03776, 2025.
 [^mammoth1]: Smithsonian Institution. Mammuthus primigenius (Blumbach) [3D model]. https://3d.si.edu/object/
 3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12, 2020.
-[^mammoth2] Max Noichl. Examples for umap-dimensionality reduction using 3D models of prehistoric animals. https:
-//doi.org/10.5281/zenodo.17290165, 2025. Version 0.0.1. Zenodo.
+[^mammoth2] Max Noichl. Examples for umap-dimensionality reduction using 3D models of prehistoric animals. https://doi.org/10.5281/zenodo.17290165, 2025. Version 0.0.1. Zenodo.
 [^sat] Ashwin Srinivasan. Statlog (Landsat Satellite). UCI Machine Learning Repository, 1993. DOI:
 https://doi.org/10.24432/C55887
