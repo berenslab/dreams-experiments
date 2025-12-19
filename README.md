@@ -74,5 +74,5 @@ In the experiments, we benchmarked DREAMS using seven real-world datasets that a
 [^genomes]: The 1000 Genomes Project Consortium. A global reference for human genetic variation. Nature, 526(7571): 68–74, 2015.
 [^wagner]: Daniel E Wagner, Caleb Weinreb, Zach M Collins, James A Briggs, Sean G Megason, and Allon M Klein. Single-cell mapping of gene expression landscapes and lineage in the zebrafish embryo. Science, 360(6392): 981–987, 2018.
 [^starmap]: Koshi Watanabe, Keisuke Maeda, Takahiro Ogawa, and Miki Haseyama. StarMAP: Global neighbor embedding for faithful data visualization. arXiv preprint arXiv:2502.03776, 2025.
-[^mammoth] Max Noichl. Examples for umap-dimensionality reduction using 3D models of prehistoric animals. https://doi.org/10.5281/zenodo.17290165, 2025. Version 0.0.1. Zenodo.
-[^sat] Ashwin Srinivasan. Statlog (Landsat Satellite). UCI Machine Learning Repository, 1993. DOI:https://doi.org/10.24432/C55887
+[^mammoth]: Max Noichl. Examples for umap-dimensionality reduction using 3D models of prehistoric animals. https://doi.org/10.5281/zenodo.17290165, 2025. Version 0.0.1. Zenodo.
+[^sat]: Ashwin Srinivasan. Statlog (Landsat Satellite). UCI Machine Learning Repository, 1993. DOI:https://doi.org/10.24432/C55887
