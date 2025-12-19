@@ -62,7 +62,7 @@ In the experiments, we benchmarked DREAMS using seven real-world datasets that a
 | Wagner et al.[^wagner] | [Download](https://kleintools.hms.harvard.edu/paper_websites/wagner_zebrafish_timecourse2018/mainpage.html) 
 | Packer et al.[^packer]   | [Download]( http://cb.csail.mit.edu/cb/densvis/datasets/)                     |
 | 1000 Genomes[^genomes]  | [Download](https://ftp.1000genomes.ebi.ac.uk)
-| Mammoth[^mammoth1][^mammoth2]  | [Download](https://github.com/MNoichl/UMAP-examples-mammoth/blob/master/mammoth_a.csv)
+| Mammoth[^mammoth1] [^mammoth2]  | [Download](https://github.com/MNoichl/UMAP-examples-mammoth/blob/master/mammoth_a.csv)
 | Satellite[^sat] | [Download](https://archive.ics.uci.edu/dataset/146/statlog+landsat+satellite)
 
 
